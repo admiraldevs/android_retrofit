@@ -2,6 +2,7 @@ package com.example.androidretrofit.networks
 
 import androidx.lifecycle.MutableLiveData
 import com.example.androidretrofit.models.BaseUserResponse
+import com.example.androidretrofit.models.CreateUserResponse
 import com.example.androidretrofit.models.UserDataResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,5 +37,31 @@ class UserNetworkRepository {
         })
 
         return usersData
+    }
+
+    fun createUser(userData: UserDataResponse): MutableLiveData<UserDataResponse> {
+        val createdUserData = MutableLiveData<UserDataResponse>()
+
+        NetworkConfig.userApi().createUser(userData).enqueue(object: Callback<CreateUserResponse> {
+            override fun onFailure(call: Call<CreateUserResponse>, t: Throwable) {
+                createdUserData.postValue(null)
+            }
+
+            override fun onResponse(
+                call: Call<CreateUserResponse>,
+                response: Response<CreateUserResponse>) {
+
+                if(response.isSuccessful) {
+                    val createdUserResponse = response.body()?.created_users as UserDataResponse
+                    createdUserData.postValue(createdUserResponse)
+                } else {
+                    createdUserData.postValue(null)
+                }
+
+            }
+
+        })
+
+        return createdUserData
     }
 }
