@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidretrofit.R
-import com.example.androidretrofit.listeners.MyUserListener
+import com.example.androidretrofit.listeners.UserListener
 import com.example.androidretrofit.models.UserDataResponse
 import kotlinx.android.synthetic.main.item_user.view.*
 
-class UserAdapter(private val clickListener: MyUserListener) : RecyclerView.Adapter<UserAdapter.MyUserViewHolder>() {
+class UserAdapter(private val clickListener: UserListener) : RecyclerView.Adapter<UserAdapter.MyUserViewHolder>() {
 
     private val myUsers = ArrayList<UserDataResponse>()
 
