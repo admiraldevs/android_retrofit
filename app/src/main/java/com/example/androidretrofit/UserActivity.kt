@@ -1,5 +1,6 @@
 package com.example.androidretrofit
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidretrofit.adapters.UserAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class UserActivity : AppCompatActivity() {
+class UserActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var adapter: UserAdapter
     private lateinit var viewModel: UserViewModel
@@ -27,6 +28,8 @@ class UserActivity : AppCompatActivity() {
         initRecyclerView()
         //get data from retrofit
         fetchUserList()
+        // click listener
+        setClickListener()
     }
 
     private fun initViewModel() {
@@ -60,6 +63,18 @@ class UserActivity : AppCompatActivity() {
 
             showLoading(false)
         })
+    }
+
+    private fun setClickListener(){
+        fabUser.setOnClickListener(this)
+    }
+
+    override fun onClick(view: View) {
+        when(view.id){
+            R.id.fabUser -> {
+                startActivity(Intent(this, UserFormActivity::class.java))
+            }
+        }
     }
 
     private fun showLoading(state: Boolean){
