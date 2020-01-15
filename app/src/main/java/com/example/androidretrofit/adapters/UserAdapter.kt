@@ -9,7 +9,7 @@ import com.example.androidretrofit.listeners.UserListener
 import com.example.androidretrofit.models.UserDataResponse
 import kotlinx.android.synthetic.main.item_user.view.*
 
-class UserAdapter(private val clickListener: UserListener) : RecyclerView.Adapter<UserAdapter.MyUserViewHolder>() {
+class UserAdapter() : RecyclerView.Adapter<UserAdapter.MyUserViewHolder>() {
 
     private val myUsers = ArrayList<UserDataResponse>()
 
@@ -39,9 +39,6 @@ class UserAdapter(private val clickListener: UserListener) : RecyclerView.Adapte
             itemView.tvMyUserName.text = myUser.name
             itemView.tvMyUserAdress.text = myUser.address
             itemView.tvMyUserMobile.text = myUser.phone
-            itemView.setOnClickListener {
-                clickListener.onClick(myUser)
-            }
         }
     }
 }
