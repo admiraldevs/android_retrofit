@@ -13,6 +13,12 @@ class UserAdapter(private val clickListener: MyUserListener) : RecyclerView.Adap
 
     private val myUsers = ArrayList<UserDataResponse>()
 
+    fun setMyUserList(listItem: ArrayList<UserDataResponse>) {
+        myUsers.clear()
+        myUsers.addAll(listItem)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyUserViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_user, parent, false)
