@@ -2,6 +2,6 @@ package com.example.androidretrofit.listeners
 
 import com.example.androidretrofit.models.UserDataResponse
 
-interface MyUserListener {
+interface UserListener {
     fun onClick(user: UserDataResponse)
 }
