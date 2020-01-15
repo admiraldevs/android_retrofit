@@ -34,7 +34,7 @@ class UserNetworkRepository {
             }
 
         })
-        
+
         return usersData
     }
 }
