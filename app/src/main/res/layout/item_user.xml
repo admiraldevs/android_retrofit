@@ -9,6 +9,7 @@
         android:id="@+id/tvMyUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryLight"
         android:textStyle="bold"
         android:text="name" />
 
