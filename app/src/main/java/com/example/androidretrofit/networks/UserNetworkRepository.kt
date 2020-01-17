@@ -127,4 +127,31 @@ class UserNetworkRepository {
 
         return updatedUserData
     }
+
+    // delete user
+    fun deleteUser(id: Int): MutableLiveData<UserDataResponse> {
+        val deletedUserData = MutableLiveData<UserDataResponse>()
+
+        NetworkConfig.userApi().deleteUser(id).enqueue(object: Callback<DeleteUserResponse> {
+            override fun onFailure(call: Call<DeleteUserResponse>, t: Throwable) {
+                deletedUserData.postValue(null)
+            }
+
+            override fun onResponse(
+                call: Call<DeleteUserResponse>,
+                response: Response<DeleteUserResponse>) {
+
+                if (response.isSuccessful) {
+                    val deletedUserResponse = response.body()?.deleted_user as UserDataResponse
+                    deletedUserData.postValue(deletedUserResponse)
+                    Log.d("@@@Retrofit", "delete: ${deletedUserResponse.name}  -- DELETE USER")
+                } else {
+                    deletedUserData.postValue(null)
+                }
+            }
+
+        })
+
+        return deletedUserData
+    }
 }
