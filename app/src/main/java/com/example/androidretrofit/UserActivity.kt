@@ -63,6 +63,7 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
                 // send data user id with intent
                 val intent = Intent(applicationContext, UserFormActivity::class.java)
                 intent.putExtra(UserFormActivity.EXTRA_USER_ID, user.id)
+                intent.putExtra(UserFormActivity.EXTRA_USER_EDIT, true)
                 startActivity(intent)
             }
         })

@@ -13,10 +13,12 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         const val EXTRA_USER_ID ="id"
+        const val EXTRA_USER_EDIT = "edit"
     }
 
     private lateinit var viewModel: UserFormViewModel
     private var userId: Int? = null
+    private var isEditUser = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +26,14 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
 
         initViewModel()
         getIntentExtra()
-        getUserData()
+        checkForm(isEditUser)
         setClickButton()
     }
 
     // get data user id from user activity
     private fun getIntentExtra() {
         userId = intent.getIntExtra(EXTRA_USER_ID, 0)
+        isEditUser = intent.getBooleanExtra(EXTRA_USER_EDIT, false)
     }
 
     // init for view model
@@ -80,6 +83,19 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
         etUserFormName.setText(user.name)
         etUserFormAddress.setText(user.address)
         etUserFormHp.setText(user.phone)
+    }
+
+    private fun checkForm(editUser : Boolean) {
+        if(editUser){
+            getUserData()
+            btnUserFormUpdate.visibility = View.VISIBLE
+            btnUserFormDelete.visibility = View.VISIBLE
+            btnUserFormAdd.visibility = View.GONE
+        } else {
+            btnUserFormUpdate.visibility = View.GONE
+            btnUserFormDelete.visibility = View.GONE
+            btnUserFormAdd.visibility = View.VISIBLE
+        }
     }
 
     // get data user item
