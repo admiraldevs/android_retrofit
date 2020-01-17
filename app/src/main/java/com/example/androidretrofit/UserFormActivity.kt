@@ -79,6 +79,8 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
     // set up for button click
     private fun setClickButton() {
         btnUserFormAdd.setOnClickListener(this)
+        btnUserFormUpdate.setOnClickListener(this)
+        btnUserFormDelete.setOnClickListener(this)
     }
 
     // implement OnClickListener interface
@@ -94,6 +96,12 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
 
                 pbUserForm.visibility = View.VISIBLE
                 createUser(newUserData)
+            }
+            R.id.btnUserFormUpdate -> {
+
+            }
+            R.id.btnUserFormDelete -> {
+
             }
         }
     }
