@@ -11,6 +11,11 @@ import kotlinx.android.synthetic.main.activity_user_form.*
 
 class UserFormActivity : AppCompatActivity(), View.OnClickListener {
 
+    companion object {
+        const val EXTRA_USER = "user"
+        const val EXTRA_USER_ID ="id"
+    }
+
     private lateinit var viewModel: UserFormViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -59,7 +59,11 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         // call function to handle items click
         adapter.setOnItemClickCallback(object : UserClickListener{
             override fun onClick(user: UserDataResponse) {
-                Toast.makeText(this@UserActivity, user.name, Toast.LENGTH_SHORT).show()
+                // set up for intent to user form activity
+                // send data user id with intent
+                val intent = Intent(applicationContext, UserFormActivity::class.java)
+                intent.putExtra(UserFormActivity.EXTRA_USER_ID, user.id)
+                startActivity(intent)
             }
         })
     }
