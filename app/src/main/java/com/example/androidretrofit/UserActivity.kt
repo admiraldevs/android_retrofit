@@ -35,6 +35,12 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         setClickListener()
     }
 
+    override fun onResume() {
+        super.onResume()
+        //reload data from retrofit
+        fetchUserList()
+    }
+
     private fun initViewModel() {
         // initialize view model to user view model
         viewModel = ViewModelProviders.of(this)
