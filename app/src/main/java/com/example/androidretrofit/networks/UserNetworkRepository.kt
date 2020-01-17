@@ -1,5 +1,6 @@
 package com.example.androidretrofit.networks
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.androidretrofit.models.BaseUserResponse
 import com.example.androidretrofit.models.CreateUserResponse
@@ -54,6 +55,7 @@ class UserNetworkRepository {
                 if(response.isSuccessful) {
                     val createdUserResponse = response.body()?.created_users as UserDataResponse
                     createdUserData.postValue(createdUserResponse)
+                    Log.d("@@@Retrofit", "id: ${userData.id}, User ${userData.name}  -- CREATED")
                 } else {
                     createdUserData.postValue(null)
                 }
