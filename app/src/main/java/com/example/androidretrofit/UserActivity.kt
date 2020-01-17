@@ -4,11 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidretrofit.adapters.UserAdapter
+import com.example.androidretrofit.listeners.UserClickListener
+import com.example.androidretrofit.models.UserDataResponse
 import kotlinx.android.synthetic.main.activity_main.*
 
 class UserActivity : AppCompatActivity(), View.OnClickListener {
@@ -46,6 +49,13 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         // initialize adapter to user adapter
         adapter = UserAdapter()
         rvUser.adapter = adapter
+
+        // call function to handle items click
+        adapter.setOnItemClickCallback(object : UserClickListener{
+            override fun onClick(user: UserDataResponse) {
+                Toast.makeText(this@UserActivity, user.name, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun setupListDivider() {

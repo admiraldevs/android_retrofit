@@ -5,18 +5,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidretrofit.R
-import com.example.androidretrofit.listeners.UserListener
+import com.example.androidretrofit.listeners.UserClickListener
 import com.example.androidretrofit.models.UserDataResponse
 import kotlinx.android.synthetic.main.item_user.view.*
 
 class UserAdapter() : RecyclerView.Adapter<UserAdapter.MyUserViewHolder>() {
 
     private val myUsers = ArrayList<UserDataResponse>()
+    private lateinit var userItemClickCallback: UserClickListener
 
+    // set data
     fun setMyUserList(listItem: ArrayList<UserDataResponse>) {
         myUsers.clear()
         myUsers.addAll(listItem)
         notifyDataSetChanged()
+    }
+
+    // item click callback
+    fun setOnItemClickCallback(onItemClickCallback: UserClickListener){
+        this.userItemClickCallback = onItemClickCallback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyUserViewHolder {
@@ -31,7 +38,13 @@ class UserAdapter() : RecyclerView.Adapter<UserAdapter.MyUserViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyUserViewHolder, position: Int) {
+        // call bind view function
         holder.bind(myUsers[position])
+
+        // set item click callback
+        holder.itemView.setOnClickListener {
+            userItemClickCallback.onClick(myUsers[holder.adapterPosition])
+        }
     }
 
     inner class MyUserViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
