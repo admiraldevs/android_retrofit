@@ -38,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/sp_name"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -49,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/address"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -60,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/sp_handphone"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -70,6 +73,24 @@
             android:background="@color/colorPrimaryLight"
             android:textColor="@android:color/white"
             android:text="Add"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnUserFormUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:text="Update"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnUserFormDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@android:color/holo_red_light"
+            android:textColor="@android:color/white"
+            android:text="Remove"/>
 
     </LinearLayout>
 
