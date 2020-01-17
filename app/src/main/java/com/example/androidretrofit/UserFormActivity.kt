@@ -78,6 +78,18 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
+    // delete user
+    private fun deleteUser(id: Int) {
+        viewModel.deleteUser(id).observe(this, Observer {
+            if (it != null) {
+                Toast.makeText(this, "Successfully Deleted!", Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, "Failed to delete", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
     private fun populateFormData(user: UserDataResponse) {
         userId = user.id
         etUserFormName.setText(user.name)
@@ -135,11 +147,15 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
                         etUserFormHp.text.toString()
                     )
 
+                    pbUserForm.visibility = View.VISIBLE
                     updateUser(id, updateUserData)
                 }
             }
             R.id.btnUserFormDelete -> {
-
+                userId?.let { id ->
+                    pbUserForm.visibility = View.VISIBLE
+                    deleteUser(id)
+                }
             }
         }
     }
