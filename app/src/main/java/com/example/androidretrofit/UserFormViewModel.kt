@@ -17,4 +17,11 @@ class UserFormViewModel :ViewModel() {
 
         return UserNetworkRepository().createUser(userData)
     }
+
+    // update user
+    fun updateUser(id: Int, userData: UserDataResponse)
+            : MutableLiveData<UserDataResponse> {
+
+        return UserNetworkRepository().updateUser(id, userData)
+    }
 }
