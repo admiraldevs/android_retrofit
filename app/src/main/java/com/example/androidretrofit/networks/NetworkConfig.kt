@@ -1,10 +1,7 @@
 package com.example.androidretrofit.networks
 
 import com.example.androidretrofit.BuildConfig
-import com.example.androidretrofit.models.BaseUserResponse
-import com.example.androidretrofit.models.CreateUserResponse
-import com.example.androidretrofit.models.SingleUserResponse
-import com.example.androidretrofit.models.UserDataResponse
+import com.example.androidretrofit.models.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -66,5 +63,9 @@ interface UserApiService {
     @POST("api/v1/user")
     fun createUser(@Body userData: UserDataResponse)
             : Call<CreateUserResponse>
+    //update data
+    @PUT("api/v1/user/{id}")
+    fun updateUser(@Path("id") id: Int, @Body userData: UserDataResponse):
+            Call<UpdatedUserResponse>
 
 }
