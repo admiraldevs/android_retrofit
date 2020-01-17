@@ -67,5 +67,9 @@ interface UserApiService {
     @PUT("api/v1/user/{id}")
     fun updateUser(@Path("id") id: Int, @Body userData: UserDataResponse):
             Call<UpdatedUserResponse>
+    // delete data
+    @DELETE("api/v1/user/{id}")
+    fun deleteUser(@Path("id") id: Int)
+            : Call<DeleteUserResponse>
 
 }
