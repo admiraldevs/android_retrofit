@@ -62,6 +62,19 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
+    // update data
+    private fun updateUser(id: Int, userData: UserDataResponse) {
+        viewModel.updateUser(id, userData).observe(this, Observer { userDataReponse ->
+
+            if (userDataReponse != null) {
+                Toast.makeText(this, "Updated Successfully", Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, "Failed to update", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
     private fun populateFormData(user: UserDataResponse) {
         userId = user.id
         etUserFormName.setText(user.name)
@@ -98,7 +111,16 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
                 createUser(newUserData)
             }
             R.id.btnUserFormUpdate -> {
+                userId?.let { id ->
+                    val updateUserData = UserDataResponse(
+                        etUserFormAddress.text.toString(),
+                        id,
+                        etUserFormName.text.toString(),
+                        etUserFormHp.text.toString()
+                    )
 
+                    updateUser(id, updateUserData)
+                }
             }
             R.id.btnUserFormDelete -> {
 
