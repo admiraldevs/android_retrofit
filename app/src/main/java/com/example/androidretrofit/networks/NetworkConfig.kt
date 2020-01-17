@@ -3,6 +3,7 @@ package com.example.androidretrofit.networks
 import com.example.androidretrofit.BuildConfig
 import com.example.androidretrofit.models.BaseUserResponse
 import com.example.androidretrofit.models.CreateUserResponse
+import com.example.androidretrofit.models.SingleUserResponse
 import com.example.androidretrofit.models.UserDataResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -53,10 +54,14 @@ class NetworkConfig {
 }
 
 interface UserApiService {
-    // get data
+    // get all data
     @GET("api/v1/users")
     fun fetchUsers()
             : Call<BaseUserResponse>
+    // get single data
+    @GET("api/v1/user/{id}")
+    fun getUser(@Path("id") id: Int)
+            :Call<SingleUserResponse<UserDataResponse>>
     // create data
     @POST("api/v1/user")
     fun createUser(@Body userData: UserDataResponse)
