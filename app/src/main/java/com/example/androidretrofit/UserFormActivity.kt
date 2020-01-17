@@ -16,18 +16,38 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private lateinit var viewModel: UserFormViewModel
+    private var userId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_form)
 
         initViewModel()
+        getIntentExtra()
+        getUserData()
         setClickButton()
+    }
+
+    // get data user id from user activity
+    private fun getIntentExtra() {
+        userId = intent.getIntExtra(EXTRA_USER_ID, 0)
     }
 
     // init for view model
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(UserFormViewModel::class.java)
+    }
+
+    // get single data
+    private fun getUser(userId: Int){
+        viewModel.getUser(userId).observe(this, Observer { userDataReponse ->
+            if(userDataReponse != null){
+                Toast.makeText(this, "User loaded successfull!", Toast.LENGTH_SHORT).show()
+                populateFormData(userDataReponse)
+                pbUserForm.visibility = View.GONE
+                llMyUserFormLoading.visibility = View.VISIBLE
+            }
+        })
     }
 
     // create function
@@ -40,6 +60,20 @@ class UserFormActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, "Failed to add", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun populateFormData(user: UserDataResponse) {
+        userId = user.id
+        etUserFormName.setText(user.name)
+        etUserFormAddress.setText(user.address)
+        etUserFormHp.setText(user.phone)
+    }
+
+    // get data user item
+    private fun getUserData() {
+        pbUserForm.visibility = View.VISIBLE
+        llMyUserFormLoading.visibility = View.GONE
+        getUser(userId as Int)
     }
 
     // set up for button click

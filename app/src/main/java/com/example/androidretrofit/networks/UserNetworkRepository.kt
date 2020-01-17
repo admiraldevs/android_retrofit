@@ -61,7 +61,7 @@ class UserNetworkRepository {
                 if(response.isSuccessful){
                     val userResponse = response.body()?.data as UserDataResponse
                     userData.postValue(userResponse)
-                    Log.d("@@@Retrofit", "get: ${userResponse.name}  -- GET ALL")
+                    Log.d("@@@Retrofit", "get: ${userResponse.name}  -- GET USER")
                 } else {
                     userData.postValue(null)
                 }
