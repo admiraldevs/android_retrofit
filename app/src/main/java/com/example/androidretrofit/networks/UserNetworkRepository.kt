@@ -2,10 +2,7 @@ package com.example.androidretrofit.networks
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.androidretrofit.models.BaseUserResponse
-import com.example.androidretrofit.models.CreateUserResponse
-import com.example.androidretrofit.models.SingleUserResponse
-import com.example.androidretrofit.models.UserDataResponse
+import com.example.androidretrofit.models.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -100,5 +97,33 @@ class UserNetworkRepository {
         })
 
         return createdUserData
+    }
+
+    // update user
+    fun updateUser(id: Int, userData: UserDataResponse): MutableLiveData<UserDataResponse> {
+        val updatedUserData = MutableLiveData<UserDataResponse>()
+
+        NetworkConfig.userApi().updateUser(id, userData)
+            .enqueue(object: Callback<UpdatedUserResponse> {
+
+                override fun onFailure(call: Call<UpdatedUserResponse>, t: Throwable) {
+                    updatedUserData.postValue(null)
+                }
+
+                override fun onResponse(
+                    call: Call<UpdatedUserResponse>,
+                    response: Response<UpdatedUserResponse>) {
+
+                    if (response.isSuccessful) {
+                        val updatedUserResponse = response.body()?.updated_user as UserDataResponse
+                        updatedUserData.postValue(updatedUserResponse)
+                    } else {
+                        updatedUserData.postValue(null)
+                    }
+                }
+
+            })
+
+        return updatedUserData
     }
 }
