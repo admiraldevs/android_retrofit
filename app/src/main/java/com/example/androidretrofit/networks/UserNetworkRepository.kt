@@ -117,6 +117,7 @@ class UserNetworkRepository {
                     if (response.isSuccessful) {
                         val updatedUserResponse = response.body()?.updated_user as UserDataResponse
                         updatedUserData.postValue(updatedUserResponse)
+                        Log.d("@@@Retrofit", "update: ${updatedUserResponse.name}  -- UPDATE USER")
                     } else {
                         updatedUserData.postValue(null)
                     }
